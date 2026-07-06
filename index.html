@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 智慧管院 - 跨域產學對接平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(180deg, #f8fbff 0%, #eef6ff 45%, #ffffff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(96, 165, 250, 0.26), transparent 35%),
+                        radial-gradient(circle at bottom left, rgba(167, 139, 250, 0.18), transparent 40%),
+                        linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-slate-700 selection:bg-indigo-200/80">
+
+    <!-- 背景裝飾 -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-200/70 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-200/70 blur-[120px] rounded-full"></div>
+    </div>
+
+    <!-- 導覽列 -->
+    <nav class="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-indigo-50 rounded-xl border border-indigo-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-5"/></svg>
+                    </div>
+                    <span class="text-2xl font-black tracking-tight text-slate-900">
+                        AI <span class="text-indigo-600">智慧管院</span>
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8 font-medium">
+                    <a href="#lecturers" class="text-slate-600 hover:text-indigo-600 transition-all">師資團隊</a>
+                    <a href="#showcase" class="text-slate-600 hover:text-indigo-600 transition-all">成果展示</a>
+                    <a href="#courses" class="text-slate-600 hover:text-indigo-600 transition-all">課程安排</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主視覺區塊 -->
+    <section class="relative pt-24 pb-32 hero-gradient overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-indigo-700 uppercase bg-white/90 border border-indigo-200 rounded-full shadow-sm">
+                Empowering Digital Transformation
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-8 leading-tight text-slate-900">
+                AI 驅動管理創新 <br>
+                <span class="text-gradient">跨域產學對接平台</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-12">
+                結合屏科大菁英教師、業界專家與卓越學子，<br class="hidden md:block">
+                打造產官學研深度融合的數位創新基地。
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#courses" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-2xl transition-all shadow-lg shadow-indigo-600/20">
+                    探索核心課程
+                </a>
+                <a href="#lecturers" class="px-8 py-4 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-2xl border border-slate-200 transition-all shadow-sm">
+                    認識師資
+                </a>
+                <a href="competition.html" class="px-8 py-4 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-2xl border border-blue-200 transition-all shadow-sm">
+                    競賽作品展示
+                </a>
+                <a href="class.html" class="px-8 py-4 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-2xl border border-purple-200 transition-all shadow-sm">
+                    學生作品
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 成果展示區塊 -->
+    <section id="showcase" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-black text-slate-900 mb-4">成果展示</h2>
+            <div class="h-1.5 w-20 bg-indigo-600 mx-auto rounded-full"></div>
+            <p class="mt-6 text-slate-600 font-medium">整合競賽成果與課程學生作品，展示 AI 應用學習成果。</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+            <a href="competition.html" class="glass-card p-8 rounded-[2rem] hover:border-blue-500/50 transition-all group block">
+                <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-4xl mb-6 border border-blue-200">🏆</div>
+                <h3 class="text-2xl font-black text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">AI應用創意競賽作品展示網站</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">展示參賽學生以 AI 解決生活與管理情境問題的創意成果。</p>
+                <span class="inline-flex items-center gap-2 text-blue-600 text-sm font-bold">
+                    前往 competition.html
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </span>
+            </a>
+
+            <a href="class.html" class="glass-card p-8 rounded-[2rem] hover:border-purple-500/50 transition-all group block">
+                <div class="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-4xl mb-6 border border-purple-200">📚</div>
+                <h3 class="text-2xl font-black text-slate-900 mb-3 group-hover:text-purple-600 transition-colors">學生作品</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">彙整課程學習成果、學生網頁與 AI 應用作品展示。</p>
+                <span class="inline-flex items-center gap-2 text-purple-600 text-sm font-bold">
+                    前往 class.html
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 講師區塊 -->
+    <section id="lecturers" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="flex items-center gap-4 mb-16">
+            <h2 class="text-4xl font-black text-slate-900">上課講師</h2>
+            <div class="h-px flex-1 bg-gradient-to-r from-indigo-300 to-transparent"></div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-24">
+            <!-- 吳相勳 -->
+            <div class="glass-card p-8 rounded-[2rem] hover:border-indigo-500/50 transition-all group relative overflow-hidden">
+                <div class="w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-indigo-200">👨‍🏫</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">吳相勳</h3>
+                <p class="text-indigo-600 font-bold mb-3 uppercase tracking-wider text-xs">核心授課講師</p>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">負責 AI 應用實務系列課程，引領學生將技術轉化為商業價值。</p>
+                <a href="https://537sonic.github.io/SONIC/" target="_blank" class="inline-flex items-center gap-2 text-slate-700 text-sm font-bold group-hover:text-indigo-600 transition-colors">
+                    個人頁面 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+            </div>
+            <!-- 蔡登茂 -->
+            <div class="glass-card p-8 rounded-[2rem] hover:border-blue-500/50 transition-all group relative overflow-hidden">
+                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-blue-200">👨‍💼</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">蔡登茂</h3>
+                <p class="text-blue-600 font-bold mb-3 uppercase tracking-wider text-xs">專業授課講師</p>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">產業數位轉型專家，擁有深厚的實戰經驗與學術背景。</p>
+                <a href="https://im.npust.edu.tw/teacher/%e8%94%a1%e7%99%bb%e8%8c%82/" target="_blank" class="inline-flex items-center gap-2 text-slate-700 text-sm font-bold group-hover:text-blue-600 transition-colors">
+                    個人頁面 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+            </div>
+            <!-- 何正斌 -->
+            <div class="glass-card p-8 rounded-[2rem] hover:border-emerald-500/50 transition-all group relative overflow-hidden">
+                <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-emerald-200">💻</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">何正斌</h3>
+                <p class="text-emerald-600 font-bold mb-3 uppercase tracking-wider text-xs">專業授課講師</p>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">專精於 AI 時代下的行政系務資訊化與校務行政效能提升。</p>
+                <a href="https://d11aas.github.io/ho/" target="_blank" class="inline-flex items-center gap-2 text-slate-700 text-sm font-bold group-hover:text-emerald-600 transition-colors">
+                    個人頁面 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                </a>
+            </div>
+            <!-- 林堂烈 -->
+            <div class="glass-card p-8 rounded-[2rem] hover:border-purple-500/50 transition-all group relative overflow-hidden">
+                <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-purple-200">💡</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">林堂烈</h3>
+                <p class="text-purple-600 font-bold mb-3 uppercase tracking-wider text-xs">專題講座</p>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">專注於 AI 教育與產學合作整合規劃，開拓師生跨域視野。</p>
+            </div>
+            <!-- 黃政勛 -->
+            <div class="glass-card p-8 rounded-[2rem] hover:border-cyan-500/50 transition-all group relative overflow-hidden">
+                <div class="w-14 h-14 bg-cyan-50 rounded-2xl flex items-center justify-center text-3xl mb-6 border border-cyan-200">🚀</div>
+                <h3 class="text-xl font-bold text-slate-900 mb-1">黃政勛</h3>
+                <p class="text-cyan-600 font-bold mb-3 uppercase tracking-wider text-xs">專業授課講師</p>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">參與 AI 應用與數位創新相關課程授課，協助學生發展實作能力。</p>
+            </div>
+        </div>
+
+        <!-- 種子老師團隊 -->
+        <div class="mb-10 text-center">
+            <h3 class="text-xl font-bold text-slate-600 uppercase tracking-[0.2em] mb-12">種子老師團隊</h3>
+            <div class="glass-card rounded-[3rem] p-12 overflow-hidden relative max-w-2xl mx-auto">
+                <div class="grid grid-cols-2 gap-y-12 gap-x-6 justify-items-center" id="seed-teachers-grid">
+                    <!-- JS 生成 -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 課程安排區塊 -->
+    <section id="courses" class="py-24 max-w-5xl mx-auto px-6">
+        <div class="flex flex-col items-center mb-16">
+            <h2 class="text-4xl font-black text-slate-900 mb-2">課程進度安排</h2>
+            <p class="text-indigo-600 font-medium">Course Timeline & Roadmap</p>
+        </div>
+
+        <div class="space-y-6" id="courses-timeline">
+            <!-- JS 生成 -->
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="bg-white text-slate-600 py-20 px-6 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+                    <div class="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center border border-indigo-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-600"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-5"/></svg>
+                    </div>
+                    <span class="text-slate-900 text-2xl font-black">AI 智慧管院</span>
+                </div>
+                <p class="max-w-sm mx-auto md:mx-0 text-sm leading-relaxed mb-6">
+                    致力於將前沿 AI 技術轉化為管理競爭力，為未來的數位轉型奠定堅實基礎。
+                </p>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end gap-6">
+                <div class="text-sm text-center md:text-right space-y-1">
+                    <p class="text-slate-800 font-bold">國立屏東科技大學</p>
+                    <p>© 2026 AI 智慧管理學院版權所有</p>
+                </div>
+                <div class="flex gap-8 font-bold text-sm">
+                    <a href="#" class="hover:text-indigo-600 transition-colors">隱私權政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 資料設定
+        const seedTeachers = [
+            { name: "何正斌", link: "https://d11aas.github.io/ho/" },
+            { name: "徐彬偉" }
+        ];
+
+        const courseData = [
+            { date: '10/01', teacher: '林堂烈老師', title: 'AI教育與產學合作整合規劃' },
+            { date: '11/05', teacher: '吳相勳老師', title: '打造個人化AI教學助理' },
+            { date: '11/14', teacher: '吳相勳老師', title: '生成式AI輔助課程與教案設計' },
+            { date: '11/19', teacher: '吳相勳老師', title: '善用NotebookLM 加速文獻探討與論文寫作' },
+            { date: '12/01', teacher: '蔡登茂講師', title: 'AI手把手入門教學' },
+            { date: '12/19', teacher: '何正斌講師', title: 'AI時代下的行政系務資訊化應用' },
+            { date: '01/09', teacher: '吳相勳講師', title: '「拉霸、黑盒子與教學研的黃金時代」' },
+            { date: '01/10-11', teacher: '郭穎蓉講師', title: 'AI 實戰行銷工坊' },
+            { date: '03/02', teacher: '吳相勳講師', title: '大洗牌：生成式AI的商業思考與實戰' }
+        ];
+
+        // 生成種子老師
+        const seedGrid = document.getElementById('seed-teachers-grid');
+        seedTeachers.forEach(teacher => {
+            const wrapper = teacher.link ? document.createElement('a') : document.createElement('div');
+            if (teacher.link) {
+                wrapper.href = teacher.link;
+                wrapper.target = "_blank";
+                wrapper.rel = "noopener noreferrer";
+            }
+            
+            wrapper.className = "flex flex-col items-center text-center space-y-3 group";
+            wrapper.innerHTML = `
+                <div class="w-20 h-20 rounded-2xl flex items-center justify-center font-bold text-xl border-2 transition-all shadow-inner ${
+                    teacher.link 
+                    ? 'bg-indigo-50 text-indigo-700 border-indigo-200 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600 shadow-indigo-100' 
+                    : 'bg-slate-100 text-slate-600 border-slate-200'
+                }">
+                    ${teacher.name[0]}
+                </div>
+                <div>
+                    <span class="block font-bold transition-colors ${teacher.link ? 'text-indigo-700 group-hover:text-indigo-900' : 'text-slate-600'}">
+                        ${teacher.name}
+                    </span>
+                </div>
+            `;
+            seedGrid.appendChild(wrapper);
+        });
+
+        // 生成課程進度
+        const coursesTimeline = document.getElementById('courses-timeline');
+        courseData.forEach(course => {
+            const div = document.createElement('div');
+            div.className = "glass-card p-6 rounded-3xl group flex flex-col md:flex-row items-start md:items-center gap-6 hover:border-indigo-500/40 transition-all";
+            div.innerHTML = `
+                <div class="min-w-[100px] text-center md:text-left">
+                    <div class="text-xs font-black text-indigo-600 mb-1 uppercase tracking-tighter">Event Date</div>
+                    <div class="text-xl font-black text-slate-900">${course.date}</div>
+                </div>
+                <div class="flex-1 space-y-1">
+                    <div class="text-slate-500 text-xs font-bold uppercase tracking-widest">${course.teacher}</div>
+                    <h3 class="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                        ${course.title}
+                    </h3>
+                </div>
+            `;
+            coursesTimeline.appendChild(div);
+        });
+    </script>
+</body>
+</html>
