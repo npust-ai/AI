@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生作品集展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 漸層背景色陣列，用來為不同的卡片套用隨機色彩 */
+        .gradient-1 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+        .gradient-2 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+        .gradient-3 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
+        .gradient-4 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%); }
+        .gradient-5 { background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%); }
+        .gradient-6 { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
+    </style>
+</head>
+<body class="antialiased text-gray-800 flex flex-col min-h-screen">
+
+    <!-- 頂部導航/標題 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <h1 class="text-2xl font-bold text-gray-900 tracking-wider">2026年專題討論期末學生作品集</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-full transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h4m4 0h4a1 1 0 001-1V10"></path>
+                    </svg>
+                    回首頁
+                </a>
+                <div class="text-sm text-gray-500 font-medium bg-gray-100 px-4 py-2 rounded-full">
+                    共 <span id="student-count" class="text-indigo-600 font-bold">0</span> 位學生
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="text-center sm:text-left">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">作品藝廊</h2>
+                <p class="text-gray-500">點擊學生名片以查看詳細作品資訊與介紹。</p>
+            </div>
+            
+            <!-- 搜尋列 -->
+            <div class="relative w-full sm:w-72">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <input type="text" id="search-input" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors" placeholder="搜尋姓名或專題...">
+            </div>
+        </div>
+
+        <!-- 學生卡片網格 -->
+        <div id="student-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <!-- 卡片內容將由 JavaScript 動態生成 -->
+        </div>
+
+    </main>
+
+    <!-- 頁尾 -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-auto">
+        <p class="text-sm text-gray-400">&copy; 2026 學生作品展示網站. All rights reserved.</p>
+    </footer>
+
+    <!-- 作品展示對話框 (Modal) -->
+    <div id="work-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-2xl w-11/12 max-w-2xl overflow-hidden transform scale-95 transition-transform duration-300" id="modal-content">
+            
+            <!-- Modal 頂部背景圖 -->
+            <div id="modal-header-bg" class="h-48 w-full bg-gray-300 relative">
+                <button onclick="closeModal()" class="absolute top-4 right-4 bg-white bg-opacity-70 hover:bg-opacity-100 text-gray-800 rounded-full p-2 focus:outline-none transition-colors shadow">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-8 relative">
+                <!-- 大頭貼 -->
+                <div class="absolute -top-12 left-8 w-24 h-24 bg-white rounded-full p-1 shadow-lg">
+                    <div id="modal-avatar" class="w-full h-full rounded-full bg-indigo-100 flex items-center justify-center text-3xl font-bold text-indigo-600">
+                        <!-- 首字 -->
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 id="modal-student-name" class="text-2xl font-bold text-gray-900 mb-1">學生姓名</h3>
+                    <p id="modal-project-title" class="text-indigo-600 text-sm font-medium mb-6">網頁前端設計作品</p>
+                    
+                    <h4 class="text-lg font-semibold text-gray-800 border-b pb-2 mb-4">作品介紹</h4>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+            <div class="bg-gray-50 px-8 py-4 flex justify-end gap-3 border-t border-gray-100">
+                <a id="modal-link-btn" href="#" target="_blank" class="hidden px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    前往網站
+                </a>
+                <a id="modal-video-btn" href="#" target="_blank" class="hidden px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    觀看影片
+                </a>
+                <button onclick="closeModal()" class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    關閉視窗
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 來自圖片的學生名單與專題連結
+        const students = [
+            { name: "洪慧玲", url: "https://kk96336933.github.io/oht-scheduler-studio/spt.html", videoUrl: "https://youtu.be/wKz5jzL5V5A", project: "OHT EDD 排程器" },
+            { name: "魏俊溢", url: "https://jeffyokowei-design.github.io/oht-scheduler/", videoUrl: "https://youtube.com/shorts/Pfwda8i-fg0?feature=share", project: "OHT 排程分析工具" }, 
+            { name: "許詩沅", url: "https://suna0502-bit.github.io/Skill-Financial-Intelligence/", videoUrl: "https://youtu.be/sddQewa05xI", project: "金融智慧技能" }, 
+            { name: "廖盈貴", url: "https://vivian957.github.io/ai-note-assistant/", project: "AI 筆記助手" }, 
+            { name: "黃子芸", url: "https://huangtzuyun01.github.io/machine-doctor-skill/", videoUrl: "https://youtu.be/86NIGWnZ0-8", project: "機器醫師技能" },
+            { name: "沈宛瑩", url: "https://wanying-collab.github.io/ai-hotpot-simulator/", videoUrl: "https://youtu.be/NmoV0nXpVAk?si=Z0fLWhIioPqW1aMZ", project: "AI 火鍋模擬器" }, 
+            { name: "陳嘉億", url: "https://jia-i918.github.io/fortune-monopoly-0/", videoUrl: "https://youtu.be/U-LU2djBvPI", project: "財富大富翁遊戲" }, 
+            { name: "黃筠庭", url: "https://ivyun.github.io/korean_grammar_explainer/", videoUrl: "https://youtube.com/shorts/xLO_Hsp_qPQ?si=HwGQXdVHjRssdyx3", project: "韓文語法解釋器" }, 
+            { name: "黃心霓", url: "https://cnnnnni.github.io/budget-calculator/", videoUrl: "https://youtube.com/shorts/7IeR7Z5zPM8?si=yAb1ImRfJV63yPxw", project: "預算計算機" }, 
+            { name: "陳楷文", url: "https://vinke-69.github.io/oht-scheduling-system/", project: "OHT 排程系統" },
+            { name: "林宥任", url: "https://z0928667645-web.github.io/002github.io/", videoUrl: "https://youtu.be/pfo4EvxhxgA", project: "個人網頁專案" }, 
+            { name: "周芳毓", url: "https://fangyu3138.github.io/moneymoney-2/", videoUrl: "https://youtu.be/5X3ivfN-y6A", project: "微型理財儀表板" }, 
+            { name: "林映羽", url: "https://cola218.github.io/-/", videoUrl: "https://youtu.be/zcva68cl1j0?si=B1AM0cgTmCcpcWkb", project: "互動網頁設計專題"}, 
+            { name: "李冠儀", url: "https://machine-troubleshooting-assistant-nxdvo7nhvjzlg3b2pzujv8.streamlit.app/", videoUrl: "https://www.youtube.com/watch?v=NnHmqsQYcDE", project: "機器故障排除助手" }, 
+            { name: "沈群鈞", url: "https://danis9469.github.io/", videoUrl: "https://youtu.be/7ReKeEYYHzM", project: "個人網頁" },
+            { name: "李依庭", url: "https://eating2003.github.io/fitness-1/", videoUrl: "https://youtube.com/shorts/BM0WWnHeLX4?si=YGwtvR25CbPjHWVw", project: "健身計畫 1" },
+            { name: "黃宜璇", url: "https://huangyixuan95-web.github.io/DailyProductionTracker/", videoUrl: "https://youtube.com/shorts/1eb-AgmpAg0?si=Jr1By5snBBjCOFIK", project: "每日產量追蹤器" }, 
+            { name: "陸翊寧", url: "https://lyn-design-cmd.github.io/workflow-dashboard/", videoUrl: "https://youtube.com/shorts/0oQ2Sdfp48U?si=py0PKkMgV1Q1EUDY", project: "工作流儀表板" }, 
+            { name: "蔡文瑜", url: "https://wen030321.github.io/FRAM-Skill/fa.html", videoUrl: "https://youtu.be/KkLWk3EfGss", project: "FRAM 技能" }, 
+            { name: "鄭卉庭", url: "https://ansett0824.github.io/rfm-kmeans-customer-analysis-skill/web/?v=2", videoUrl: "https://youtu.be/YtWtPt9x02Y", project: "RFM K-means 客戶分析" },
+            { name: "林黃羿", url: "https://haungyi-lin.github.io/expense-split-calculator/", videoUrl: "https://youtu.be/EVUEd5Ul3BQ", project: "分攤費用計算機" }, 
+            { name: "于驊麟", url: "https://y-u-y-u-L.github.io/yy/anime.html", videoUrl: "https://youtu.be/sriPMzdb_1w", project: "動漫網頁" }, 
+            { name: "郭之駿", url: "https://cblzjp045-lab.github.io/oht-scheduler/", videoUrl: "https://www.youtube.com/watch?v=ziDMVIFepcI", project: "OHT 排程器" }, 
+            { name: "李芷迎", url: "https://a0912976077.github.io/travel-planner/", videoUrl: "https://youtube.com/shorts/aMz6Q4bDjAI?si=PW1hsCTangaFYLa3", project: "旅遊規劃器" },
+            { name: "黃建榮", url: "https://huangjianrong10-ui.github.io/FIFA-World-Cup2026-skill/", videoUrl: "https://youtu.be/y3-V2VX4emo", project: "2026 世界盃技能" }, 
+            { name: "陳品瑄", url: "https://pin77719.github.io/HF-E-ESG-report-analysis-skill/", videoUrl: "https://youtube.com/shorts/Jg-OpyGkuis?si=9rLRprCzXdUVi-HC", project: "ESG 報告分析技能" }, 
+            { name: "林采儀", url: "https://clinyi1005.github.io/ai-decision-helper-skill/", videoUrl: "https://youtu.be/z7OsUPCLGNU", project: "AI 決策助手技能" }, 
+            { name: "胡家妍", url: "https://yoyohoshi.github.io/travel-calculator/", videoUrl: "https://youtube.com/shorts/3Kj4AQn2H_8?feature=share", project: "旅遊計算機" }, 
+            { name: "林杰毅", url: "https://jayyi0972186245.github.io/bee-climate-monitoring/", videoUrl: "https://youtube.com/shorts/p-WPkV9FxHo?si=FchyoyvCEBTGaQ3J", project: "蜜蜂氣候監控" }, 
+            { name: "蘇靚瑀", url: "https://ching-yu430.github.io/cafe/", videoUrl: "https://youtube.com/shorts/35wA9pc6tNI?si=dG5TonzWN-nSUSaY", project: "咖啡廳網站" },
+            { name: "王緯翔", url: "https://wweixiang485-a11y.github.io/AI-Scheduling-Skill/", videoUrl: "https://youtu.be/pP4UqgOfCDc", project: "AI 排程技能" },
+            { name: "曾冠鳴", url: "https://guan6406.github.io/ai-travel-planner1/", videoUrl: "https://youtu.be/UMjSMrPu7cs", project: "AI 旅遊規劃器" },
+            { name: "戴維雄", url: "https://kuroba8560.github.io/GAME/GAME.html", videoUrl: "https://youtu.be/wCDnsUW4fd4?si=5mqQiMg1WPJfgipC", project: "遊戲專案" }, 
+            { name: "唐莆家", url: "https://bibilabu123.github.io/-briefing/", videoUrl: "https://youtu.be/XYv3GgUlMsI?si=cyGwLbPsIikx9jeb", project: "簡報網站" }, 
+            { name: "宋昌庭", url: "https://aries0526.github.io/Aries/", videoUrl: "https://youtu.be/OiLDGqE5jgQ", project: "Aries 個人專案" },
+            { name: "陳佳群", url: "https://j0918-pixel.github.io/airfare-budget-hunter-skill/", videoUrl: "https://youtu.be/q92NOtdENMg", project: "機票預算獵人技能" }, 
+            { name: "曾韻如", url: "https://ruuuuu0415-hub.github.io/academic-keyword-card-generator/", videoUrl: "https://youtu.be/GzC7DyM2Tzs", project: "學術關鍵字卡產生器" }, 
+            { name: "蘇郁媜", url: "https://doubi901001.github.io/travel-choice-helper/", project: "旅遊選擇助手" }, 
+            { name: "朱桂棠", url: "https://fakeromg777.github.io/website/process-yield-cost-tool/", videoUrl: "https://youtu.be/aZDJPyaFHiY", project: "製程良率成本工具" },
+            { name: "周倍君", url: "https://d11aas.github.io/web123/fa.html", videoUrl: "https://youtu.be/s-dNf08A2HY", project: "股票投資決策模型＋影片作品" }
+        ];
+
+        // 漸層色陣列總數
+        const gradientCount = 6;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('student-grid');
+            const searchInput = document.getElementById('search-input');
+            const countDisplay = document.getElementById('student-count');
+
+            // 建立一個負責渲染卡片的函數
+            function renderCards(studentList) {
+                grid.innerHTML = ''; // 清空網格
+                countDisplay.textContent = studentList.length; // 更新顯示人數
+
+                // 如果找不到結果，顯示提示文字
+                if (studentList.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500">找不到符合的學生或專題名稱。</div>`;
+                    return;
+                }
+
+                studentList.forEach((student, index) => {
+                    // 決定隨機或循序的漸層背景
+                    const gradientClass = `gradient-${(index % gradientCount) + 1}`;
+                    const firstName = student.name.charAt(0); // 取得姓氏作為大頭貼文字
+                    const projectName = student.project || "互動網頁設計專題";
+                    const projectUrl = student.url || "";
+                    const videoUrl = student.videoUrl || "";
+                    const actionText = projectUrl && videoUrl ? "網站＋影片" : (projectUrl ? "前往網站" : (videoUrl ? "觀看影片" : "查看介紹"));
+
+                    const cardHTML = `
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover cursor-pointer flex flex-col h-full" onclick="openModal('${student.name}', '${gradientClass}', '${projectName}', '${projectUrl}', '${videoUrl}')">
+                            <!-- 卡片上方縮圖區 -->
+                            <div class="h-32 ${gradientClass} relative flex items-center justify-center overflow-hidden">
+                                <!-- 裝飾用圖形 -->
+                                <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-white opacity-20 rounded-full"></div>
+                                <div class="absolute top-4 left-4 w-12 h-12 bg-white opacity-20 rounded-full"></div>
+                                <svg class="w-12 h-12 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                            
+                            <!-- 卡片資訊區 -->
+                            <div class="p-5 flex-grow flex flex-col relative">
+                                <!-- 小大頭貼 -->
+                                <div class="absolute -top-8 left-5 w-14 h-14 bg-white rounded-full p-1 shadow-sm">
+                                    <div class="w-full h-full rounded-full bg-gray-100 flex items-center justify-center text-lg font-bold text-gray-700">
+                                        ${firstName}
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 flex-grow">
+                                    <h3 class="text-lg font-bold text-gray-900">${student.name}</h3>
+                                    <p class="text-xs text-gray-500 mt-1">${projectName}</p>
+                                </div>
+                                
+                                <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-indigo-600 text-sm font-medium">
+                                    <span>${actionText}</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.innerHTML += cardHTML;
+                });
+            }
+
+            // 網頁載入時，初次渲染全部名單
+            renderCards(students);
+
+            // 監聽搜尋列輸入事件
+            searchInput.addEventListener('input', (e) => {
+                const keyword = e.target.value.toLowerCase().trim();
+                
+                // 篩選符合條件的學生
+                const filteredList = students.filter(student => {
+                    const studentName = student.name.toLowerCase();
+                    const projectName = (student.project || "互動網頁設計專題").toLowerCase();
+                    // 只要姓名或專題名稱包含搜尋字串就保留
+                    return studentName.includes(keyword) || projectName.includes(keyword);
+                });
+                
+                // 重新渲染篩選後的名單
+                renderCards(filteredList);
+            });
+        });
+
+        // Modal 控制邏輯
+        const modal = document.getElementById('work-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalName = document.getElementById('modal-student-name');
+        const modalProjectTitle = document.getElementById('modal-project-title');
+        const modalAvatar = document.getElementById('modal-avatar');
+        const modalHeaderBg = document.getElementById('modal-header-bg');
+        const modalLinkBtn = document.getElementById('modal-link-btn');
+        const modalVideoBtn = document.getElementById('modal-video-btn');
+
+        function openModal(studentName, gradientClass, projectName, projectUrl, videoUrl) {
+            modalName.textContent = studentName;
+            modalAvatar.textContent = studentName.charAt(0);
+            modalProjectTitle.textContent = projectName;
+            
+            // 處理前往網站按鈕
+            if (projectUrl) {
+                modalLinkBtn.href = projectUrl;
+                modalLinkBtn.classList.remove('hidden');
+            } else {
+                modalLinkBtn.href = "#";
+                modalLinkBtn.classList.add('hidden');
+            }
+
+            // 處理觀看影片按鈕
+            if (videoUrl) {
+                modalVideoBtn.href = videoUrl;
+                modalVideoBtn.classList.remove('hidden');
+            } else {
+                modalVideoBtn.href = "#";
+                modalVideoBtn.classList.add('hidden');
+            }
+
+            // 重置背景色並套用新的
+            modalHeaderBg.className = `h-48 w-full relative ${gradientClass}`;
+
+            modal.classList.remove('hidden');
+            // 使用一點延遲讓 transition 效果能出現
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            // 等待動畫結束後隱藏
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // 點擊 Modal 背景也可關閉
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // ESC 鍵關閉
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
