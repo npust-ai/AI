@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMBA學生作品展示</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef6ff 0%, #f8fbff 45%, #ffffff 100%);
+      color: #1f2937;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+
+    .home-link {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .home-link:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+    }
+
+    header {
+      padding: 64px 20px 36px;
+      text-align: center;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      top: -160px;
+      left: -120px;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      bottom: -130px;
+      right: -80px;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      margin-bottom: 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 2.5vw, 21px);
+      color: #dbeafe;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 48px 20px 72px;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 36px;
+      color: #4b5563;
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid #e5e7eb;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 18px 45px rgba(37, 99, 235, 0.09);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(37, 99, 235, 0.16);
+      border-color: #bfdbfe;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 6px;
+      width: 100%;
+      background: linear-gradient(90deg, #2563eb, #38bdf8);
+    }
+
+    .number {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .card h2 {
+      font-size: 25px;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .label {
+      display: inline-block;
+      color: #2563eb;
+      background: #eff6ff;
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 14px;
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .url {
+      word-break: break-all;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 22px;
+      min-height: 45px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.92;
+      transform: scale(1.01);
+    }
+
+    footer {
+      text-align: center;
+      padding: 26px 20px;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      background: #ffffff;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+  
+    .home-link {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .home-link:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+    }
+
+    header {
+        padding-top: 48px;
+      }
+
+      main {
+        padding-top: 34px;
+      }
+
+      .home-link {
+        top: 14px;
+        left: 14px;
+        padding: 8px 13px;
+        font-size: 14px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="home-link" href="index.html">← 回首頁</a>
+    <div class="header-content">
+      <div class="badge">EMBA Student Projects</div>
+      <h1>EMBA學生作品展示</h1>
+      <p class="subtitle">整合作品連結，展示學生學習成果與實作作品。</p>
+    </div>
+  </header>
+
+  <main>
+    <p class="intro">
+      本網站彙整 EMBA 學生作品，點選下方作品卡片即可前往觀看各位同學的成果展示。
+    </p>
+
+    <section class="grid" aria-label="學生作品列表">
+      <article class="card">
+        <div class="number">01</div>
+        <h2>石志忠</h2>
+        <span class="label">學生作品</span>
+        <p class="url">https://kouzi586.github.io/ret/?v=1780061373475</p>
+        <a class="btn" href="https://kouzi586.github.io/ret/?v=1780061373475" target="_blank" rel="noopener noreferrer">前往作品 →</a>
+      </article>
+
+      <article class="card">
+        <div class="number">02</div>
+        <h2>蔡竣丞</h2>
+        <span class="label">學生作品</span>
+        <p class="url">https://sucaidanbing-a.github.io/-/</p>
+        <a class="btn" href="https://sucaidanbing-a.github.io/-/" target="_blank" rel="noopener noreferrer">前往作品 →</a>
+      </article>
+
+      <article class="card">
+        <div class="number">03</div>
+        <h2>關筠蒨</h2>
+        <span class="label">學生作品</span>
+        <p class="url">https://cpho0820.github.io/sk858/</p>
+        <a class="btn" href="https://cpho0820.github.io/sk858/" target="_blank" rel="noopener noreferrer">前往作品 →</a>
+      </article>
+
+      <article class="card">
+        <div class="number">04</div>
+        <h2>陳麗安</h2>
+        <span class="label">學生作品</span>
+        <p class="url">https://terrychien28.github.io/terry/</p>
+        <a class="btn" href="https://terrychien28.github.io/terry/" target="_blank" rel="noopener noreferrer">前往作品 →</a>
+      </article>
+
+      <article class="card">
+        <div class="number">05</div>
+        <h2>簡秀鑾</h2>
+        <span class="label">學生作品</span>
+        <p class="url">https://grayann0223.github.io/Grayann/</p>
+        <a class="btn" href="https://grayann0223.github.io/Grayann/" target="_blank" rel="noopener noreferrer">前往作品 →</a>
+      </article>
+
+      <article class="card">
+        <div class="number">06</div>
+        <h2>鍾靈</h2>
+        <span class="label">學生作品</span>
+        <p class="url">https://d11aas.github.io/ASEA/</p>
+        <a class="btn" href="https://d11aas.github.io/ASEA/" target="_blank" rel="noopener noreferrer">前往作品 →</a>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 EMBA學生作品展示｜Student Project Showcase
+  </footer>
+</body>
+</html>
